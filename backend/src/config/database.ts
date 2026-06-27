@@ -31,13 +31,14 @@ export const connectDatabase = async (): Promise<void> => {
     await import('../modules/user/user.model');
     await import('../modules/organization/organization.model');
     await import('../modules/organization/organization-member.model');
+    await import('../modules/workspace/workspace.model');
 
     // Define associations
     const { defineAssociations } = await import('./associations');
     defineAssociations();
 
     // Sync
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter: false });
     console.log('✅ Database synced successfully');
 
   } catch (error) {

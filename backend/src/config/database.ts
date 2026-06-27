@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize';
+import 'dotenv/config';
 
 const sequelize = new Sequelize({
   dialect: 'mysql',
@@ -26,10 +27,16 @@ export const connectDatabase = async (): Promise<void> => {
     await sequelize.authenticate();
     console.log('✅ Database connected successfully');
 
-    // Import all models
+    // Import models
     await import('../modules/user/user.model');
+    await import('../modules/organization/organization.model');
+    await import('../modules/organization/organization-member.model');
 
-    // Sync models
+    // Define associations
+    const { defineAssociations } = await import('./associations');
+    defineAssociations();
+
+    // Sync
     await sequelize.sync({ alter: true });
     console.log('✅ Database synced successfully');
 

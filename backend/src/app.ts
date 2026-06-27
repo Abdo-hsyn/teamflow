@@ -6,6 +6,7 @@ import { AppError } from './shared/errors/AppError';
 import { errorResponse } from './shared/response/apiResponse';
 import authRoutes from './modules/auth/auth.routes';
 import userRoutes from './modules/user/user.routes';
+import organizationRoutes from './modules/organization/organization.routes';
 
 const app: Application = express();
 
@@ -30,6 +31,8 @@ app.get('/health', (req: Request, res: Response) => {
 app.use('/api/v1/auth', authRoutes);
 
 app.use('/api/v1/users', userRoutes);
+
+app.use('/api/v1/organizations', organizationRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {

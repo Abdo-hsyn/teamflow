@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import taskController from './controllers/task.controller';
 import { authenticate } from '../../middleware/authenticate';
+import commentController from './controllers/comment.controller';
 
 const router = Router();
 
@@ -33,5 +34,10 @@ router.put('/:publicId', authenticate, taskController.update.bind(taskController
 // @desc    Delete task
 // @access  Private
 router.delete('/:publicId', authenticate, taskController.delete.bind(taskController));
+
+// Comment Routes
+router.post('/:taskPublicId/comments', authenticate, commentController.addComment.bind(commentController));
+router.get('/:taskPublicId/comments', authenticate, commentController.getComments.bind(commentController));
+router.delete('/comments/:publicId', authenticate, commentController.deleteComment.bind(commentController));
 
 export default router;

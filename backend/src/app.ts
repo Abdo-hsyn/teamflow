@@ -9,6 +9,7 @@ import userRoutes from './modules/user/user.routes';
 import organizationRoutes from './modules/organization/organization.routes';
 import workspaceRoutes from './modules/workspace/workspace.routes';
 import projectRoutes from './modules/project/project.routes';
+import taskRoutes from './modules/task/task.routes';
 
 const app: Application = express();
 
@@ -39,6 +40,8 @@ app.use('/api/v1/organizations', organizationRoutes);
 app.use('/api/v1/workspaces', workspaceRoutes);
 
 app.use('/api/v1/projects', projectRoutes);
+
+app.use('/api/v1/tasks', taskRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {

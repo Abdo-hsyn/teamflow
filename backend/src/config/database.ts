@@ -34,6 +34,7 @@ export const connectDatabase = async (): Promise<void> => {
     await import('../modules/workspace/workspace.model');
     await import('../modules/project/project.model');
     await import('../modules/task/comment.model');
+    await import('../modules/notification/notification.model');
 
     // Define associations
     const { defineAssociations } = await import('./associations');

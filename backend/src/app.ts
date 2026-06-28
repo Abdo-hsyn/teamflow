@@ -10,6 +10,7 @@ import organizationRoutes from './modules/organization/organization.routes';
 import workspaceRoutes from './modules/workspace/workspace.routes';
 import projectRoutes from './modules/project/project.routes';
 import taskRoutes from './modules/task/task.routes';
+import notificationRoutes from './modules/notification/notification.routes';
 
 const app: Application = express();
 
@@ -42,6 +43,8 @@ app.use('/api/v1/workspaces', workspaceRoutes);
 app.use('/api/v1/projects', projectRoutes);
 
 app.use('/api/v1/tasks', taskRoutes);
+
+app.use('/api/v1/notifications', notificationRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {

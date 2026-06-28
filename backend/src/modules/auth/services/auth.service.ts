@@ -4,6 +4,7 @@ import { hashPassword, comparePassword, generateRandomToken } from '../../../sha
 import { generateAccessToken, generateRefreshToken } from '../../../shared/helpers/jwt.helper';
 import { RegisterDTO, LoginDTO, ForgotPasswordDTO, ResetPasswordDTO, AuthResponseDTO, AuthTokensDTO } from '../dto/auth.dto';
 import { ConflictError, UnauthorizedError, NotFoundError, BadRequestError } from '../../../shared/errors/AppError';
+import emailService from '../../../shared/services/email.service';
 
 class AuthService {
 
@@ -35,7 +36,11 @@ class AuthService {
     // Generate tokens
     const tokens = this.generateTokens(user);
 
-    // TODO: Send verification email
+    await emailService.sendVerificationEmail(
+  user.email,
+  user.firstName,
+  emailVerificationToken
+);
 
     return {
       user: {
@@ -115,7 +120,11 @@ class AuthService {
       passwordResetExpires: resetExpires,
     });
 
-    // TODO: Send reset password email
+    await emailService.sendPasswordResetEmail(
+  user.email,
+  user.firstName,
+  resetToken
+);
   }
 
   async resetPassword(data: ResetPasswordDTO): Promise<void> {

@@ -5,7 +5,6 @@ import { connectDatabase } from './config/database';
 const PORT = process.env.PORT || 5000;
 
 const startServer = async (): Promise<void> => {
-  // Connect Database
   await connectDatabase();
 
   const server = app.listen(PORT, () => {

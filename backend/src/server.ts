@@ -1,11 +1,14 @@
 import 'dotenv/config';
 import app from './app';
 import { connectDatabase } from './config/database';
+import redisService from './shared/services/redis.service';
 
 const PORT = process.env.PORT || 5000;
 
 const startServer = async (): Promise<void> => {
   await connectDatabase();
+  // Initialize Redis
+await redisService.get('ping');
 
   const server = app.listen(PORT, () => {
     console.log(`
